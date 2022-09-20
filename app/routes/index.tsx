@@ -26,6 +26,8 @@ export default function Index() {
           </ul>
         </nav>
       </div>
+      <Link to="blog">My blog</Link>
     </div>
+
   );
 }

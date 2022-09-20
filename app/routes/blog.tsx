@@ -6,19 +6,6 @@ import stylesUrl from '../styles/jokes.css';
 import { db } from "~/utils/db.server";
 import { Joke } from "@prisma/client";
 
-type LoaderData = { jokes: Array<{ id: string; name: string }>; };
-
-export const loader: LoaderFunction = async () => {
-    console.log('Loader function - jokes')
-    const data: LoaderData = {
-      jokes: await db.joke.findMany({
-        take: 5,
-      select: { id: true, name: true },
-      orderBy: { createdAt: "desc" },
-      }),
-    };
-    return json(data);
-  };
 
 export const links: LinksFunction = () => {
   return [
@@ -28,10 +15,8 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export default function JokesRoute() {
-    console.log('JokesRoute function - jokes')
+export default function BlogRoute() {
 
-    const data = useLoaderData<LoaderData>();
     return (
         <div className="jokes-layout">
           <header className="jokes-header">
@@ -51,14 +36,14 @@ export default function JokesRoute() {
           <main className="jokes-main">
             <div className="container">
               <div className="jokes-list">
-                <Link to=".">Get a random joke</Link>
+                <h1>Blog</h1>
                 <p>Here are a few more jokes to check out:</p>
                 <ul>
-                  {data.jokes.map((joke) => (
+                  {/* {data.jokes.map((joke) => (
                     <li key={joke.id}>
                       <Link to={joke.id}>{joke.name}</Link>
                     </li>
-                  ))}
+                  ))} */}
                 </ul>
                 <Link to="new" className="button">
                   Add your own
